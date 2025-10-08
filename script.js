@@ -10,7 +10,7 @@ function removeLoader(el) {
     postList.removeChild(el);
 };
 
-// Set event listener to load posts upon clicking button (adding it to the window enables this feature by clicking anywhere in the window)
+// Set event listener to load posts upon clicking button
 fetchButton.addEventListener("click", function () {
 
     // Adding Loading Message
@@ -44,7 +44,7 @@ fetchButton.addEventListener("click", function () {
 
 const postForm = document.getElementById("postForm");
 
-// Function to clear/reset confirmation message with each "submit" so that the confirmations don't stack on page
+// Function to clear confirmation message with each "submit" so that the confirmations don't stack on page
 function removeIfExists(id) {
     const el = document.getElementById(id);
     if (el) {
@@ -63,7 +63,6 @@ postForm.addEventListener('submit', (event) => {
         title: formTitle.value,
         body: formBody.value
     };
-    // Add Loading Message
 
     fetch("https://jsonplaceholder.typicode.com/posts", {
         method: "POST",
@@ -80,7 +79,6 @@ postForm.addEventListener('submit', (event) => {
         })
         .then(function (data) {
             removeIfExists("confirmation-message")
-            // setTimeout(() => removeLoader(postForm, loadingMessage), 300);
             const confirmation = document.createElement("p");
             confirmation.id = "confirmation-message"
             confirmation.innerHTML = `✅ Post sumbitted! <br> <br> "<strong>${formTitle.value}</strong>: ${formBody.value}"`;
